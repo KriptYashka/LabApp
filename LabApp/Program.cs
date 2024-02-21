@@ -13,7 +13,7 @@ class JumpData
         surname = _surname;
         level = _level;
         Random rand = new Random();
-        double avg = rand.NextDouble() * 4 + 1;
+        double avg = rand.NextDouble() * 4 + 1; // 1..5
         results = new double[4];
         for (int i = 0; i < 4; i++)
         {
