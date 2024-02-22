@@ -184,8 +184,71 @@ class Program
 
     }
 
+    class SnowData
+    {
+        private string surname;
+        private int group;
+        public double deltaTime;
+
+        public SnowData(string _surname, int _group, double _deltaTime) {
+            surname = _surname;
+            group = _group;
+            deltaTime = _deltaTime;
+        }
+
+        public void show(int place)
+        {
+            Console.WriteLine("| {0, 3} | {1, 3} | {2, 10} | {3}m {4, 2:f0}s |", place, group, surname, Math.Floor(deltaTime / 60), 60 * (deltaTime / 60 - Math.Floor(deltaTime / 60)));
+        }
+
+    }
+
+    static void Task3()
+    {
+        /*
+         Лыжные гонки проводятся отдельно для двух групп участников. Результаты соревнований заданы в виде фамилий участников и их результатов в каждой группе. 
+        Расположить результаты соревнований в каждой группе в порядке занятых мест. 
+        Объединить результаты обеих групп с сохранением упорядоченности и вывести в виде таблицы с заголовком.
+         */
+        int N = 20;
+        Random rand = new Random();
+        string[] surnames =
+        {
+            "Ivanova",
+            "Petrova",
+            "Rudenko",
+            "Klochay",
+            "Vasnecova",
+            "Kan",
+            "Romanova",
+            "Smolina",
+            "Darmograi",
+        };
+
+        SnowData[] results = new SnowData[N];
+        for (int i = 0; i < N; i++)
+        {
+            int surnameIndex = rand.Next(surnames.Length);
+            double result = 120 + rand.NextDouble() * 100;
+            SnowData snowData = new SnowData(surnames[surnameIndex], i % 2, result);
+            results[i] = snowData;
+        }
+
+        var query = results.OrderBy(x => x.deltaTime);
+
+        Console.WriteLine("|Place|Group| Surname    | Time   |");
+        Console.WriteLine("|/////|/////|////////////|////////|");
+        int place = 1;
+        foreach (SnowData data in query)
+        {
+            data.show(place++);
+        }
+
+
+    }
+
     static void Main(string[] args)
     {
-        Task2();
+        Task3();
     }
 }
